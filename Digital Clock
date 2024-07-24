@@ -1,0 +1,54 @@
+#include <iostream>
+#include <chrono>
+#include <thread>
+using namespace std;
+
+int main()
+{
+    int h, m, s, err;
+    err = 0;
+
+    while (err == 0)
+    {
+        cout << "Enter hours: ";
+        cin >> h;
+        cout << "Enter minutes: ";
+        cin >> m;
+        cout << "Enter seconds: ";
+        cin >> s;
+
+        if (h >= 0 && h < 24 && m >= 0 && m < 60 && s >= 0 && s < 60)
+        {
+            err++;
+        }
+        else
+        {
+            cout << "Invalid time input. Please enter again.\n";
+        }
+    }
+
+    while (true)
+    {
+        system("clear"); // use "clear" for Unix/Linux/MacOS, "cls" for Windows
+        cout << (h < 10 ? "0" : "") << h << ":"
+             << (m < 10 ? "0" : "") << m << ":"
+             << (s < 10 ? "0" : "") << s << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+        s++;
+        if (s > 59)
+        {
+            s = 0;
+            m++;
+        }
+        if (m > 59)
+        {
+            m = 0;
+            h++;
+        }
+        if (h > 23)
+        {
+            h = 0;
+        }
+    }
+    return 0;
+}
